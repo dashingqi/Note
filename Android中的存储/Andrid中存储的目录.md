@@ -57,6 +57,8 @@ var cachePath = cacheDir.absolutePath
 
 ##### 私有目录
 
+私有目录下的文件其他应用是可以访问到的，当应用被卸载了，私有目录下的文件也随之被删除。
+
 对于该目录Android官方也提供了对应的API来访问
 
 ```kotlin
@@ -73,6 +75,8 @@ var filesDir = getExternalFilesDir(null)?.absolutePath
 该APi获取到的路径地址为：/storage/emulated/0/Android/data/PackageName/files
 
 ##### 公共目录
+
+公共目录下的文件是自由访问的，当应用被卸载之后存在在公共目录下的文件依然存在！
 
 提供的API
 
