@@ -24,7 +24,9 @@ Kotlin中的协程就是一套由Kotlin官方提供的线程框架API，就像Ja
 
 ###### 开始之前-闭包
 
-在之前先说下【闭包】这个概念，我们在使用Kotlin的API的时候会经常用到闭包；
+在之前先说下【闭包】这个概念，因为在协程的使用过程中会涉及到这个概念；
+
+我们在使用Kotlin的API的时候也会经常用到闭包；
 
 【闭包】这个东西不是Kotlin中特有的特性，是从Java8开始就出现了；
 
@@ -46,33 +48,34 @@ Thread({
 Thread{
   // .... doWork ....
 }
-
 ```
 
-基本的使用
+###### 基本的使用
 
 ```kotlin
-// 方法一：通过CoroutineContext创建一个协程对象
+// 方法一：这种方式开启的协程是线程阻塞的，不能在实际业务中使用；
+runBlocking{
+  
+}
+// 方法二：使用GlobalScope,直接调用launch开启协程
+// 该方式开启的协程是不会阻塞线程的。但是它的生命周期是和app一致的。
+GlobalScope.launch{
+  
+}
+// 方法三：通过CoroutineScope创建一个协程对象
+// 其中context是为CoroutineContext类型的参数
+// 通常比较推荐使用这种方法，可以通过传递的context参数去管理和控制协程的生命周期；
+// 这里的context可以理解为协程的上下文
+// launch里面包裹的代码就是我们要开启的协程
 val coroutineScope = CoroutineScope(context)
 cortineScope.launch{
   // .... doWork ....
 }
-
-// 方法二：使用GlobalScope,直接调用launch开启协程
-GlobalScope.launch{
-  
-}
-
-// 方法三
-runBlocking{
-  
-}
-
 ```
 
+###### 好在哪里
 
-
-在给出结论之前，我们先看下面这个场景
+在给出结论之前，我们先看下面这两个场景
 
 场景一：我们从Server拿到一个学生信息：
 
@@ -84,7 +87,6 @@ private fun getData(){
         }
         override fun onFailure() {      
         }
-
     })
 }
 ```
@@ -102,16 +104,12 @@ private fun getData(){
         		override fun onSuccess(class:Class) {
             		//获取到班级信息
         			}
-
        			override fun onFailure() {
-           
         			}
     			})
         }
-        override fun onFailure() {
-           
+        override fun onFailure() {  
         }
-
     })
 }
 ```
@@ -120,53 +118,102 @@ private fun getData(){
 
 ```kotlin
 private fun getData(){
-  GlobalScope.launch(Dispatchers.Main){
+  // 创建一个CoroutineScope对象
+  val coroutineScope = CoroutineScope(Dispatchers.Main)
+  // 调用launch方法 开启一个协程，其中Dispatchers.Mian就制定我们的协程是跑在主线程中的
+  cortineScope.launch(Dispatchers.Main){
+    // async 是开启了一个新的协程，它返回的是Coroutine是实现了Deferred接口的
     val student = async { getStudent() }
     val class   = async { getClass(student.await()) }
-    // 拿到班级信息
+    // 拿到班级信息，通过调用deferred.await()可以获取到方法的返回值
     val class1  = class.await()
+    tv.text = class1.name
   }
 }
 
+/**
+ * 获取学生信息
+ */
 private suspend fun getStudent(): Student {
-    delay(100)
-    return "zhangqi"
+    withContext(Dispatchers.IO){
+      delay(100)
+      return "zhangqi"
+    } 
 }
- 
+
+/**
+ *获取班级信息
+ */
 private suspend fun getClass(): Class {
-    delay(100)
-    return "一班"
+    withContext(Dispatchers.IO){
+      delay(100)
+      return "一班" 
+    }
 }
 ```
 
-怎么样 是不是 没有对比就没有伤害
+怎么样 是不是 没有对比就没有伤害！！！
 
-我们可能使用回调这种方式使用习惯了，没觉得有什么不妥的，但是和Kotlin的协程相比
+我们可能使用回调这种方式使用习惯了，没觉得有什么不妥的，但是和Kotlin协程实现方式相比
 
 这种回调嵌套回调，是不是有点代码可读性差，维护性也不好；
 
 所以协程好在哪里：
 
-以同步代码的方式写出异步的代码，这也是Kotlin协程相比较于之前多线程框架的核心竞争力；
+使我们的代码可读性和可维护性变强了；
 
-协程消除了并发任务之间的协作式开发，可以轻松地写出复杂的并发代码；
+最重要的是：用同步代码的方式写出异步的代码，这也是Kotlin协程相比较于之前多线程框架的核心竞争力；
 
-那么协程凭啥就能这么写呢，其实
+那么协程凭啥就能这么写呢，我们看上面的代码
+
+1. 使用了 async{} 和await
+2. 我们在我们定义的函数中使用了suspend关键字 ，被suspend修饰方法的我们称之为挂起函数
+
+接着我们介绍下挂起函数
 
 ##### 挂起函数
 
 所谓的挂起就是能自动切线程并且能自动切回来的动作
 
-自定义挂起函数 使用 suspend 关键字
+自定义挂起函数 要使用 suspend 关键字
 
 ```kotlin
+// 挂起函数只能由协程或者其他挂起函数进行调度
 suspend fun method(){
+  withContext(Dispatchers.IO){
+    
+  }
 }
 ```
 
-挂起函数只能由协程或者其他挂起函数进行调度
+当我们使用launch或者async启动协程后，在协程中调用到挂起函数的时候，会被【suspend】也即就是挂起
 
-挂起函数不会阻塞线程，而是会将协程挂起，在特定的时候在继续执行；
+当我们的挂起函数执行完毕之后，协程会帮助我们把线程切回来
+
+就是当我们的协程运行在主线程上时，当调用到suspend函数，根据Dispatchers（调度器）制定线程的不同，就可能会发生线程切换，当我们的代码执行完毕后，协程会自动切回到原线程上；
+
+【切回】这个动作在Kotlin中叫做 resume 也就是恢复，这个是协程的特性；
+
+所以挂起函数要么在其他挂起函数中调用，要么在协程中调用；为啥呢？因为它要切过去还要切回来呢！
+
+其实suspend关键字并不是起到挂起的作用，它单纯只是一个【提醒】的作用，告诉调用者我这个函数将会一个耗时的函数，请在协程中调用我;
+
+###### 什么时候需要挂起函数
+
+执行耗时的任务
+
+###### 怎么写
+
+```kotlin
+suspend fun method(){
+  // withContext 也是一个挂起函数 内部是由suspend关键字修饰的
+	withContext(Dispatchers.IO){
+    //在IO线程中，执行耗时的任务
+  }	
+}
+```
+
+在Kotlin中这个挂起是非阻塞式的？
 
 ##### 非阻塞挂起
 
@@ -186,9 +233,9 @@ suspend fun method(){
 
 其实非阻塞是针对挂起这个动作特点的一个描述；本身挂起就是能自动切线程并切回来的操作，就是不阻塞UI线程的；相比较于之前的线程框架 这个能自动切换回来；
 
-在我们代码中我们看似以同步的方式在写代码，但是依靠协程却完成了异步任务；
+在我们代码中的体现就是 我们看似以同步的方式在写代码，但是依靠协程却完成了异步任务；
 
-##### 小总结一波
+##### 总结一波
 
 协程就是切线程；
 
