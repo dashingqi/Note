@@ -18,3 +18,9 @@ git remote -v
 git branch -vv
 ```
 
+###### 清除Git的提交缓存
+
+```
+git rm -r --cached .
+```
+
