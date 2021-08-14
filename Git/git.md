@@ -1,5 +1,7 @@
 ## Git操作
 
+#### 配置以及基本命令
+
 ###### 配置用户名和邮箱
 
 ```
@@ -93,7 +95,107 @@ git clong *.git
 git pull --rebase
 ```
 
+#### 分支操作
 
+###### 创建分支
+
+```
+git branch dev
+```
+
+###### 查看分支
+
+```
+git branch
+```
+
+###### 切换分支
+
+```
+git checkout dev
+```
+
+###### 创建并切换到dev分支
+
+```
+git checkout -b dev
+```
+
+###### 删除分支
+
+```
+// 当前dev分支代码合并到master分支，在master分支上删除dev分支的代码
+git branch -d dev
+
+// 强制删除
+git branch -D dev
+```
+
+###### 合并代码
+
+```
+git checkout master
+
+git merge dev
+```
+
+###### 将本地分支推送到远端，并在远端创建一个新的分支dev
+
+```
+git push origin dev
+```
+
+###### 删除远端分支dev
+
+```
+git push origin :dev
+```
+
+将本地分支推送到远端，并在远端创建一个新的分支develop
+
+```
+git push origin dev:develop
+```
+
+#### 合并分支的操作
+
+###### 查看分支提交记录
+
+```
+git log // 全量查询
+
+git log --oneling // 查看每条记录的第一行
+
+```
+
+###### 查看具体某一次提交的具体内容
+
+```
+git show id
+```
+
+###### 非 fast Forword 模式
+
+```
+git merge dev --no-ff
+```
+
+###### rebase
+
+```
+git rebase dev
+```
+
+###### git mergetool  # vimdiff
+
+```
+git mergetool
+vimdiff
+```
+
+#### 回滚和撤销
+
+git status
 
 ###### 由https切换为ssh
 
@@ -101,7 +203,7 @@ git pull --rebase
 git remote set-url origin ssh连接地址
 ```
 
-检验与之关联的远程地址链接
+###### 检验与之关联的远程地址链接
 
 ```
 git remote -v
@@ -119,4 +221,5 @@ git branch -vv
 git rm -r --cached .
 ```
 
-###### 
+
+
