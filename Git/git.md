@@ -107,6 +107,8 @@ git branch dev
 
 ```
 git branch
+
+git branch -r //查看远程分支
 ```
 
 ###### 切换分支
@@ -195,7 +197,69 @@ vimdiff
 
 #### 回滚和撤销
 
-git status
+###### 撤回到上次的commit（不会删除文件）
+
+```
+git reset dev^
+
+// 切回到上上次的commit
+git reset dev^^
+
+// 切回到具体某一个的commit
+git reset commitId
+```
+
+###### 撤回到某一次的提交（将暂存区中的文件删除）
+
+```
+git reset --hard commitid
+```
+
+###### revert 团队开发
+
+```
+git revert commitid
+
+// 撤销本次revert
+git revert --abort
+```
+
+#### 文件忽略以及同步forked仓库代码
+
+###### .gitgnore文件
+
+```
+// 生成网站
+https://www.toptal.com/developers/gitignore
+```
+
+###### 同步forked的仓库源代码
+
+```
+git remote -v
+
+git remote add upstream 上游仓库(之前forked的仓库地址)
+
+git remote -v
+
+git fetch upstream 分支名（默认是master）
+
+pull = fetch + merge
+
+// 如果你是贡献 你需要使用 merge
+
+
+```
+
+#### 免密登陆
+
+###### 参考文章
+
+```
+https://www.jianshu.com/p/63edbb08bd5f
+```
+
+
 
 ###### 由https切换为ssh
 
