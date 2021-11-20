@@ -61,6 +61,8 @@ ls -la
 git commit -m"[update]"
 
 git commit --amend
+
+git commit --amend --no-edit
 ```
 
 ###### 与远程仓库进行连接
