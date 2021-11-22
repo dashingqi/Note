@@ -11,3 +11,16 @@
 - 根据以上的安装路径找到apk
   - adb pull pathNamelist li
 
+#### 查看日志
+
+- 根据关键字过滤
+
+  ```kotlin
+  adb logcat | grep "key"
+  ```
+
+- 保存日志到文件中
+
+  ```kotlin
+  adb logcat > test.log
+  ```
