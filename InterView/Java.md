@@ -95,3 +95,28 @@ public class StringMain {
 }
 ```
 
+#### Java匿名内部类有哪些限制
+
+###### 匿名内部嘞的概念和用法
+
+```java
+// 匿名内部类，字面上意思就是没有名字的内部类；
+// 其实从虚拟机角度来看是有名字的.只不过这个名字是由Java虚拟机定义的
+// 名字就是 base.InnerClass$1
+// $1 表示是该类中的第一个匿名内部类
+Foo foo = new Foo() {
+  @Override
+  public int bar() {
+    return 0;
+  }
+};
+```
+
+
+
+###### 语言规范以及Kotlin的横向对比
+
+###### 内存泄漏的切入点
+
+
+
