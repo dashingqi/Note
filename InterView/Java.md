@@ -1,0 +1,48 @@
+#### Java中的char是由两个字节组成，如何存储UTF-8
+
+```java
+/**
+ * 1. Java中的char是由两个字节组成，如何存储UTF-8
+ * char中的字节存储的是Unicode码点
+ * Unicode是字符集 字符集包括 Unicode和ASCII 可以理解字符集是一种 一一对应的一种规则；
+ * 字符到整数的映射是通过码点
+ * UTF-16 最小单位是2个字节 UTF-8的最小单位是1个字节
+ * Java中的char存储的是UTF-16 （有点浪费）
+ * char就联想到字符串
+ * Java9之前使用的是char数组进行存储char ，一个char使用两个字节存储 编码格式是UTF-16，浪费
+ * Java9中对于字符串进行了优化，使用了byte数组，对于拉丁字符 使用Latin-1进行编码（一个字节就能存储下），对于中文以及其他字符超过Latin-1
+ * 使用UTF-16
+ * Java9中没有修复 字符数!=字符长度的bug 比如表情 一个表情的长度是2
+ */
+public class BaseMain {
+
+    public static void main(String[] args) {
+        char c = '张';
+        // char 里面存储的是什么，打印出来的是 0x5e、0x86 是Unicode的码点
+        // Unicode是字符集，字符集包括 Unicode和ASCII
+
+        // UTF-8 最小单位是1个字节
+        // UTF-16最小单位是2个字节
+        // UTF-8 、 UTF-16 是编码格式
+
+        // Java中的char存储的是 UTF-16 编码后
+
+        System.out.println(Integer.toHexString(c));
+
+        byte[] bytes = "张".getBytes(StandardCharsets.UTF_16);
+        for (byte b : bytes) {
+            System.out.println("b == " + Integer.toHexString(b));
+        }
+        // b == fffffffe
+        // b == ffffffff
+        // b == 5f
+        // b == 20
+        // 其中 fe 和 ff 是字节系列标志 不代表真正的内容
+        System.out.println("UTF_16 byte length " + bytes.length);
+        // Java9 中对与拉丁字符做了存储空间上的优化，9之前使用 char[] 数组存储，9以及之后使用 byte[] 默认是Latin-1编码也就是使用一个字节
+        // 当字符串出现中文以及其他超出Latin-1 编码范围的字符的时候，这时候就使用UTF-16进行编码，默认是占2个字节的。
+        System.out.println("\uD83D\uDE0A".length());
+    }
+}
+```
+
