@@ -97,26 +97,137 @@ public class StringMain {
 
 #### Java匿名内部类有哪些限制
 
-###### 匿名内部嘞的概念和用法
+###### 匿名内部类的概念和用法
+
+没有人类认知意义上的名字
 
 ```java
-// 匿名内部类，字面上意思就是没有名字的内部类；
-// 其实从虚拟机角度来看是有名字的.只不过这个名字是由Java虚拟机定义的
-// 名字就是 base.InnerClass$1
-// $1 表示是该类中的第一个匿名内部类
-Foo foo = new Foo() {
-  @Override
-  public int bar() {
-    return 0;
-  }
-};
+public class InnerClass {
+
+    public void run(){
+       // 匿名内部类，字面上意思就是没有名字的内部类；
+       // 其实从虚拟机角度来看是有名字的.只不过这个名字是由Java虚拟机定义的
+       // 名字就是 base.InnerClass$1
+       // $1 表示是该类中的第一个匿名内部类
+        Foo foo = new Foo() {
+            @Override
+            public int bar() {
+                return 0;
+            }
+        };
+
+        // 匿名内部类,
+        // 名字就是  base.InnerClass$2
+        Runnable runnable = new Runnable() {
+
+            @Override
+            public void run() {
+
+            }
+        };
+
+        // 方法体内部定义一个类 继承 Foo， 实现Runnable接口
+        class Test extends Foo implements Runnable {
+            @Override
+            public void run() {
+
+            }
+        }
+
+    }
+}
 ```
-
-
 
 ###### 语言规范以及Kotlin的横向对比
 
+匿名内部类的继承结构；只能继承一个父类或者实现一个接口
+
+- 先天父类
+
+  ```java
+  class InnerClass$1 extends Foo {
+      InnerClass$1(InnerClass var1) {
+          this.this$0 = var1;
+      }
+  
+      public int bar() {
+          return 0;
+      }
+  }
+  ```
+
+- 实现接口
+
+  ```java
+  class InnerClass$2 implements Runnable {
+      InnerClass$2(InnerClass var1) {
+          this.this$0 = var1;
+      }
+  
+      public void run() {
+      }
+  }
+  ```
+
+- 方法体内部可以实现也就是 同时继承一个类实现一个接口 在方法体内部
+
+  ```java
+  // 方法体内部定义一个类 继承 Foo， 实现Runnable接口
+  class Test extends Foo implements Runnable {
+    @Override
+    public void run() {
+  
+    }
+  }
+  
+  // 对应的字节码文件
+  
+  class InnerClass$1Test extends Foo implements Runnable {
+      InnerClass$1Test(InnerClass var1) {
+          this.this$0 = var1;
+      }
+  
+      public void run() {
+      }
+  }
+  ```
+
+- Kotlin可以实现
+
+  ```kotlin
+  class InnerClassKotlin {
+      fun test() {
+          // Kotlin 是可以实现
+          // 匿名内部类继承Foo，同时实现Runnable接口
+          val runnable = object : Foo(), Runnable {
+              override fun run() {
+              }
+          }
+      }
+  }
+  ```
+
+  
+
 ###### 内存泄漏的切入点
+
+匿名内部类的构造方法
+
+- 匿名内部类的构造方法是谁定义的 --- 虚拟机定义
+
+- 构造方法参数列表
+
+- Lambda表达式 SAM
+
+  ```java
+  // SAM
+  // 必需是接口，同时这个接口内部只有一个方法
+  Runnable able = () -> {
+  
+  };
+  ```
+
+  
 
 
 
