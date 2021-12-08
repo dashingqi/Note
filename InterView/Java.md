@@ -217,7 +217,7 @@ public class InnerClass {
 
 - 构造方法参数列表
 
-- Lambda表达式 SAM
+- Java中Lambda表达式：SAM
 
   ```java
   // SAM
@@ -227,7 +227,9 @@ public class InnerClass {
   };
   ```
 
-  
+#### 怎么理解Java的方法分派
 
-
+- 多态、虚方法表的认识
+- 对编译和运行是的理解和认识
+- 对Java语言规范和运行机制的深入认识
 
