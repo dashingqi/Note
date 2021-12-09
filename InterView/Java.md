@@ -279,17 +279,106 @@ public class MethodQuestion {
 }
 ```
 
-#### Java泛型的实现机制时怎么样的
+#### Java泛型的实现机制是怎么样的
 
 ###### 类型擦除有哪些优点
 
+- 减少运行时内存的占用
+- 兼容老版本的代码运行
+
 ###### 类型擦除有哪些问题
 
-- 类型擦除对编译时的影响
-  - 泛型类型没法作为方法的类型
-  - 
-- 类型擦除对运行时的影响
-- 类型擦除对反射的影响
-- 对比类型不擦除的语言
-- 为什么Java选择类型擦除6 
+- 基本类型无法作为泛型实参
+  - 需要基本类型的包装类型
+  - 装箱和拆箱的开销
+  - Google-Android 提供的SparseArray能解决
+
+- 泛型类型无法用作方法重载
+
+  ```java
+  private void method1(List<String> str){
+  
+  }
+  private void method1(List<Integer> str){
+  
+  }
+  
+  // 编译报错 编译时，类型擦除 List<Object> str
+  ```
+  
+- 类型强转的运行时开销
+
+  ```java
+  // Java 1.5之前
+  List strList = new ArrayList();
+  strList.add("aaa");
+  String value = (String)strList.get(0);
+  
+  // Java 1.5之后
+  List<String> strList = new ArrayList<>();
+  strList.add("aaa");
+  String value = strList.get(0);
+  
+  // 编译后的字节码
+  ArrayList var2 = new ArrayList();
+  var2.add("aaa");
+  // 进行了强转
+  String var3 = (String)var2.get(0);
+  
+  ```
+  
+- 泛型类型无法作为真实类型使用
+
+  ```java
+  // 泛型类型无法当做真实类型使用
+  static <T> void getMethod(T t) {
+    T instance = new T(); // 报错
+    T[] ts = new T[0]; // 报错
+    Class<T> tClass = T.class; // 报错
+  
+    // 泛型擦除 T -> Object 通过
+    List<T> list = new ArrayList<T>();
+  
+    // T -> Object 报错
+    if (list instanceof List<String>) {
+  
+    }
+  }
+  ```
+
+- 静态方法无法引用类的泛型参数
+
+  ```java
+  // 报错：类的泛型参数 在创建类的实例的时候才会确定，
+  // 静态方法属于类本身，调用的时候无法确定泛型参数
+  public class Method<T> {
+      // 静态方法无法引用类的泛型参数
+      static T get(T t){
+          
+      }
+  }
+  
+  // ============解决办法==========
+  
+  static <R> R get(R a,R b){
+    return a;
+  }
+  ```
+
+- 泛型的方法签名
+
+  - Gson
+  - Retrofit
+
+#### Activity的onActivityResult()这么麻烦，为什么不设计成回调？
+
+- onActivityResult()基本使用
+- 是否想过使用回调替换过onActivityResult
+- 回调替换onActivityResult存在什么问题
+
+###### onActivityResult()为什么麻烦
+
+
+
+
 
