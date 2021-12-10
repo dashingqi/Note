@@ -378,7 +378,4 @@ public class MethodQuestion {
 
 ###### onActivityResult()为什么麻烦
 
-
-
-
-
+![onActivityResult()工作图.png](https://upload-images.jianshu.io/upload_images/4997216-a0270bf787c00f12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
