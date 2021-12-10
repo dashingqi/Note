@@ -69,6 +69,14 @@ git commit --amend --no-edit
 
 ```
 git remote add origin https://github.com/dashingi/*git
+
+git remote add origin git@github.com:dashingqi/DQMVVMComponent.git
+```
+
+###### 删除与远程仓库的链接
+
+```java
+git remote rm origin
 ```
 
 ###### 查看与远程仓库连接关系
