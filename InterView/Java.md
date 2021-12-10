@@ -379,3 +379,29 @@ public class MethodQuestion {
 ###### onActivityResult()为什么麻烦
 
 ![onActivityResult()工作图.png](https://upload-images.jianshu.io/upload_images/4997216-a0270bf787c00f12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+- （1）代码处理逻辑分离，容易出现遗留
+- （2）返回值不明确，数据类型没有安全保障；
+- （3）当从多个页面返回有返回值的时候，onActivityResult中会会根据不用的resultCode做不同的处理，变的非常臃肿，难以维护
+
+###### 使用回调用替换onActivityResult
+
+```java
+startActivityForResult(intent,new ResultListener(){
+  void onResult(String result){
+    // do Something
+    if(!result.isEmpty()){
+      mTextView.setText(result)
+    }
+  } 
+});
+```
+
+- (1)和（3）的问题能有效解决，高内聚 将处理代码都写到一起了；
+
+**使用回调存在的问题**
+
+- 使用回调的方式 A启动B B长时间处于前台，由于内存策略问题，可能会把A回收调
+- 此时B返回的时候，此时会新建A'
+- 匿名内部类持有外部类的引用，此时mTextView是A实例中的
+- 以上就是问题所在
