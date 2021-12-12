@@ -1,3 +1,5 @@
+## Java基础
+
 #### Java中的char是由两个字节组成，如何存储UTF-8
 
 ```java
@@ -405,3 +407,128 @@ startActivityForResult(intent,new ResultListener(){
 - 此时B返回的时候，此时会新建A'
 - 匿名内部类持有外部类的引用，此时mTextView是A实例中的
 - 以上就是问题所在
+
+
+
+## Java线程
+
+#### Java中如何停止一个线程
+
+###### 考察的点
+
+- 对线程用法是否了解
+- 对线程的stop方法的了解
+- 对线程stop过程中存在的问题的了解
+- 是否熟悉interrupt中断的用法
+- 是否知道使用boolean标志位的好处
+- 是否知道interrupt底层的细节
+
+###### 停止线程
+
+- 线程直接stop不安全直接该API被废弃掉了；资源回收的问题
+
+- 为什么要废弃直接stop方法
+
+  ![Android-线程操作资源图.png](https://upload-images.jianshu.io/upload_images/4997216-46207a54fdec4c49.png?imageMogr2/auto-orient/strip|imageView2/2/w/1240)
+
+  线程1在访问内存操作资源加锁，防止其他线程访问，线程2访问访问内存，发现锁被线程1持有，此时block住了；
+
+  如果直接把线程1停止掉 锁资源没有释放，线程2又一直在blobk住；如果线程1直接被干掉的话，立即释放掉内存锁（线程直接被杀掉了），没有时间来得及处理操作的资源，此时其他线程去访问线程1操作的资源，极有可能读取到错误的数据；目前所有编程语言关于线程停止的操作都被废弃了；
+
+- 不能让线程暴力停止，得要让线程中运行的任务停止（逻辑上停止），运行的任务停止线程就自动被回收了；（任务与线程强是强相关）
+
+- 线程的停止 作用的对象不是线程本身而是线程中运行的任务；
+
+###### 线程中断 （thread.interrupt()）
+
+- interrupt 中断当前线程
+
+  ```java
+  public class InterruptableThread extends Thread {
+  
+    @Override
+    public void run() {
+      try {
+        sleep(5000);
+      } catch (InterruptedException exception) {
+        exception.printStackTrace();
+        System.out.println("interrupted!");
+      }
+    }
+  }
+  
+  public static void interruptAtThread() {
+    InterruptableThread interruptableThread = new InterruptableThread();
+    interruptableThread.start();
+  
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      System.out.println("main Interrupted");
+      e.printStackTrace();
+    }
+    // 使用 interrupt()方法中断线程中运行的任务
+    interruptableThread.interrupt();
+  }
+  ```
+
+- **interrupted()**
+
+  是静态方法，获取当前线程的中断状态，并清空
+
+- isInterrupted()
+
+​	非静态方法，获取该线程的中断状态，不清空
+
+- 关于底层jni的调用
+
+###### volatile boolean标志位
+
+```java
+public class FlagThread extends Thread {
+
+  /**
+     * 当前线程时候被中断
+     */
+  public volatile boolean isInterrupted = false;
+
+  @Override
+  public void run() {
+    for (int i = 0; i < 100000000; i++) {
+      if (isInterrupted) {
+        break;
+      }
+      System.out.println(" is == " + i);
+    }
+  }
+}
+
+/**
+     * 标志位中断Thread
+     */
+public static void flagThread() {
+  FlagThread flagThread = new FlagThread();
+  flagThread.start();
+
+  try {
+    Thread.sleep(2000);
+  } catch (InterruptedException e) {
+    e.printStackTrace();
+  }
+	
+  // 使用标志位中断线程中运行的任务
+  flagThread.isInterrupted = true;
+}
+```
+
+###### interrupt()与boolean标志位的区别
+
+| 比较项             | interrupt | boolean标志位  |
+| ------------------ | --------- | -------------- |
+| 系统方法 （sleep） | 是        | 否             |
+| 使用JNI            | 是        | 否             |
+| 加锁               | 是        | 否             |
+| 触发方式           | 抛异常    | 布尔值进行判断 |
+
+- 需要支持系统方法时用中断（比如使用了sleep方法，我们可以使用interrupt()来中断任务，抛出异常，在捕获异常的时候进行资源回收的处理）
+- 其他情况用boolean标志位（性能考虑，用boolean）
