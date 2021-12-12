@@ -532,3 +532,51 @@ public static void flagThread() {
 
 - 需要支持系统方法时用中断（比如使用了sleep方法，我们可以使用interrupt()来中断任务，抛出异常，在捕获异常的时候进行资源回收的处理）
 - 其他情况用boolean标志位（性能考虑，用boolean）
+
+#### 如何写出线程安全的程序
+
+###### 什么是线程安全
+
+- **可变**资源线程间**共享**
+
+###### 如何实现线程安全
+
+- 不共享资源
+
+  ```java
+  // 
+  public static int add(int a){
+    return a + 1;
+  }
+  
+  // ThreadLocal
+  
+  ```
+
+- 共享不可变资源
+
+  ```java
+  final int a = 3;
+  
+  int b = a++;
+  
+  // final 禁止重排序
+  ```
+
+  
+
+- 共享可变资源
+
+  - 禁止重排序
+    - final
+    - volatile
+  - 保证可见性 -> 内存模型
+    - final
+    - volatile
+    - 加锁，释放锁时会强制将缓存刷新到主内存
+  - 原子性
+    - 加锁
+    - CAS
+    - AtomicInteger
+    - 使用原子属性更新器
+
