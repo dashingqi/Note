@@ -382,9 +382,9 @@ public class MethodQuestion {
 
 ![onActivityResult()工作图.png](https://upload-images.jianshu.io/upload_images/4997216-a0270bf787c00f12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-- （1）代码处理逻辑分离，容易出现遗留
+- （1）代码处理逻辑分离，容易出现遗漏
 - （2）返回值不明确，数据类型没有安全保障；
-- （3）当从多个页面返回有返回值的时候，onActivityResult中会会根据不用的resultCode做不同的处理，变的非常臃肿，难以维护
+- （3）当从多个页面返回有返回值的时候，onActivityResult中会根据不同的resultCode做不同的处理，变的非常臃肿，难以维护；
 
 ###### 使用回调用替换onActivityResult
 
@@ -431,9 +431,13 @@ startActivityForResult(intent,new ResultListener(){
 
   ![Android-线程操作资源图.png](https://upload-images.jianshu.io/upload_images/4997216-46207a54fdec4c49.png?imageMogr2/auto-orient/strip|imageView2/2/w/1240)
 
-  线程1在访问内存操作资源加锁，防止其他线程访问，线程2访问访问内存，发现锁被线程1持有，此时block住了；
+  线程1在访问内存操作资源加锁，防止其他线程访问，线程2访问内存，发现锁被线程1持有，此时block住了；如果直接把线程1停止掉 锁资源没有释放，线程2又一直在blobk住；
 
-  如果直接把线程1停止掉 锁资源没有释放，线程2又一直在blobk住；如果线程1直接被干掉的话，立即释放掉内存锁（线程直接被杀掉了），没有时间来得及处理操作的资源，此时其他线程去访问线程1操作的资源，极有可能读取到错误的数据；目前所有编程语言关于线程停止的操作都被废弃了；
+  如果线程1直接被干掉的话，立即释放掉内存锁（线程直接被杀掉了），没有时间来得及处理操作的资源，此时其他线程去访问线程1操作的资源，极有可能读取到错误的数据；目前所有编程语言关于线程停止的操作都被废弃了；
+
+  stop方法会立刻停止线程的运行，放弃所有未执行的代码，包括 catch 和finally中的代码，因此关于资源的释放可能得不到执行；
+
+  
 
 - 不能让线程暴力停止，得要让线程中运行的任务停止（逻辑上停止），运行的任务停止线程就自动被回收了；（任务与线程强是强相关）
 
@@ -575,8 +579,45 @@ public static void flagThread() {
     - volatile
     - 加锁，释放锁时会强制将缓存刷新到主内存
   - 原子性
-    - 加锁
+    - 加锁（方法）
     - CAS
-    - AtomicInteger
+    - AtomicInteger （某一个变量）
     - 使用原子属性更新器
+
+#### ConcurrentHashMap的原理
+
+###### JDK1.6
+
+###### JDK1.7
+
+###### JDK1.8
+
+#### AtomicReference 与 AtomicReferenceFieldUpdater 的区别
+
+##### AtomicReference
+
+用于保证在修改对象引用时的线程安全性
+
+##### AtomicReferenceFieldUpdater
+
+用于将类T中将某个属性包装下，使得该属性能够在多线程中保持原子行；
+
+###### 该属性有如下要求
+
+- 该属性必须被volatile关键字修饰
+- 该属性不能被static关键字修饰
+- 该属性必须是可见
+
+###### 使用
+
+```java
+```
+
+
+
+
+
+
+
+
 
