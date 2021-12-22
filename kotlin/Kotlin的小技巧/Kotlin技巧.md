@@ -101,5 +101,107 @@ Intrinsics.checkNotNullExpressionValue(var10001, "(this as java.lang.String).toU
 boolean result1 = Intrinsics.areEqual(var10000, var10001);
 ```
 
+###### Kotlin遍历数组
 
+- forEach
 
+  ```kotlin
+  val array = arrayOf(1, 2, 3)
+  array.forEach {
+    print("it is $it")
+  }
+  
+  // 编译后的java代码
+  
+  // 创建额外的对象
+  Integer[] var3 = array;
+  int var4 = array.length;
+  
+  for(int var5 = 0; var5 < var4; ++var5) {
+    // 装箱、拆箱的操作，有一定的损耗
+    Object element$iv = var3[var5];
+    int it = ((Number)element$iv).intValue();
+    int var8 = false;
+    String var9 = "it is " + it;
+    boolean var10 = false;
+    System.out.print(var9);
+  }
+  ```
+
+  - 会生成额外的对象
+  - 存在装箱与拆箱的操作，存在一定的损耗
+
+- 使用indices
+
+  ```kotlin
+  // 使用 indices 遍历数组
+  for (index in array.indices){
+  
+  }
+  
+  // 编译后的java代码
+  int var1 = 0;
+  for(int var11 = array.length; var1 < var11; ++var1) {
+  }
+  ```
+
+  - 会生成临时的变量
+
+- 使用区间表达式
+
+  **.. 左闭右闭区间**
+
+  ```kotlin
+  for (index in 0..array.size) {
+  
+  }
+  
+  // 编译后的Java代码
+  index = 0;
+  var11 = array.length;
+  if (index <= var11) {
+    while(index != var11) {
+      ++index;
+    }
+  }
+  ```
+
+  - 会生成临时的变量
+
+  **downTo 实现降序**
+
+  ```kotlin
+  // 使用 downTo
+  for (index in 0 downTo array.size) {
+    println("downTo is $index")
+  }
+  
+  // 编译后的Java代码
+  index = array.length;
+  
+  for($i$f$forEach = false; index >= 0; --index) {
+    var12 = "downTo is " + index;
+    var13 = false;
+    System.out.println(var12);
+  }
+  ```
+
+  - 会生成临时的变量
+
+  **until左闭右开**
+
+  ```kotlin
+  // 左闭右开
+  for (index in 0 until array.size) {
+    println("until index is $index")
+  }
+  
+  // 编译后的Java代码
+  for(var11 = array.length; index < var11; ++index) {
+    var12 = "until index is " + index;
+    var13 = false;
+    System.out.println(var12);
+  }
+  ```
+
+  - 会生成临时的变量
