@@ -205,3 +205,40 @@ boolean result1 = Intrinsics.areEqual(var10000, var10001);
   ```
 
   - 会生成临时的变量
+
+#### Lambda表达式作为函数的参数进行传递 （高阶函数）
+
+```kotlin
+fun request(type: Int, call: (code: Int) -> Unit) {
+
+}
+```
+
+反编译对应的Java代码
+
+```java
+public final class LambdaDemoKt {
+   public static final void request(int type, @NotNull Function1 call) {
+      Intrinsics.checkNotNullParameter(call, "call");
+   }
+}
+
+// 字节码
+  L0
+    ALOAD 1
+    LDC "call"
+    INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter (Ljava/lang/Object;Ljava/lang/String;)V
+   L1
+    LINENUMBER 9 L1
+    ALOAD 1
+    SIPUSH 200
+    // 装箱
+    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    ILOAD 0
+    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    INVOKEINTERFACE kotlin/jvm/functions/Function2.invoke (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    POP
+```
+
+- 创建了一个Function1对象，增大了编译代码的体积
+- 存在装箱和拆箱的损耗
