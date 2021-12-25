@@ -49,7 +49,7 @@ boolean result1 = Intrinsics.areEqual(var10000, var10001);
     print("it is $it")
   }
   
-  // 编译后的java代码
+  // 反编译后的java代码
   
   // 创建额外的对象
   Integer[] var3 = array;
@@ -77,7 +77,7 @@ boolean result1 = Intrinsics.areEqual(var10000, var10001);
   
   }
   
-  // 编译后的java代码
+  // 反编译后的java代码
   int var1 = 0;
   for(int var11 = array.length; var1 < var11; ++var1) {
   }
@@ -94,7 +94,7 @@ boolean result1 = Intrinsics.areEqual(var10000, var10001);
   
   }
   
-  // 编译后的Java代码
+  // 反编译后的Java代码
   index = 0;
   var11 = array.length;
   if (index <= var11) {
@@ -114,7 +114,7 @@ boolean result1 = Intrinsics.areEqual(var10000, var10001);
     println("downTo is $index")
   }
   
-  // 编译后的Java代码
+  // 反编译后的Java代码
   index = array.length;
   
   for($i$f$forEach = false; index >= 0; --index) {
@@ -134,7 +134,7 @@ boolean result1 = Intrinsics.areEqual(var10000, var10001);
     println("until index is $index")
   }
   
-  // 编译后的Java代码
+  // 反编译后的Java代码
   for(var11 = array.length; index < var11; ++index) {
     var12 = "until index is " + index;
     var13 = false;

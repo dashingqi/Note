@@ -104,3 +104,87 @@ private fun checkNotNullMethod(message: String?) {
 | T.also  | 是             | it                   | 调用本身                     |
 | T.apply | 是             | this                 | 调用本身                     |
 
+#### 使用 T.also函数交换两个变量
+
+```kotlin
+val a = 3;
+val b = 4;
+b = a.also{ a = b }
+// T.also 会返回调用者本身，赋值给变量b，同时在作用域中把 b的值赋给变量a
+```
+
+#### Kotlin单例三种写法
+
+- 使用Object
+- 使用by lazy
+- 使用 Companion object
+- 可接受参数的单例
+
+##### 使用Object
+
+```kotlin
+object WorkSingleton{
+	// do Something
+}
+```
+
+编译后的Java代码
+
+```java
+public final class WorkSingleton {
+   @NotNull
+   public static final WorkSingleton INSTANCE;
+
+   private WorkSingleton() {
+   }
+
+   static {
+      WorkSingleton var0 = new WorkSingleton();
+      INSTANCE = var0;
+   }
+}
+```
+
+可以看出来使用的是饿汉式创建单利
+
+饿汉式：
+
+- 优点：线程安全
+- 缺点：在类加载的时候就初始化了，有点浪费内存
+
+##### 使用by lazy{}配合伴生对象
+
+```kotlin
+class WorkSingleInstance private constructor() {
+
+  companion object {
+    // 方式1
+    val INSTANCE1 by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+      WorkSingleInstance()
+    }
+
+    // 默认的mode就是 LazyThreadSafetyMode.SYNCHRONIZED
+    val INSTANCE2 by lazy {
+      WorkSingleInstance()
+    }
+  }
+}
+```
+
+##### 伴身对象创建单例
+
+```kotlin
+class WorkSingleInstance2 private constructor() {
+
+    companion object {
+        fun get(): WorkSingleInstance2 {
+            return Holder.instance
+        }
+    }
+
+    private object Holder {
+        val instance = WorkSingleInstance2()
+    }
+}
+```
+
