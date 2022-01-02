@@ -122,7 +122,7 @@ public enum Person {
 
 如果你要这么做
 
-![image-20211227202418905](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/202112272033877.png)
+![image-20211227202418905](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/202112281132104.png)
 
 
 
