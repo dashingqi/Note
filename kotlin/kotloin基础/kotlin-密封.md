@@ -1,5 +1,19 @@
 #### Kotlin-密封类
 
+#### 密封类
+
+- Sealed Classes用于表示受限制的类层次结构；
+- 从某种意义上说，Sealed Classes是枚举类的扩展；
+- 枚举的不同之处在于，枚举中常量仅仅作为单个事例存在，而Sealed Classes的子类可以表示不同状态的实例；
+
+#### Sealed Classes用于表示受限制的类层次结构
+
+Sealed Clases用于表示层次结构
+
+子类可以是任意的类，数据类、Kotlin对象、普通类、也可以是另外一个Sealed CLasses
+
+**Sealed Classes受限制**
+
 ###### Kotlin 1.0
 
 密封类必须是密封类的内部类
@@ -109,6 +123,16 @@ public enum Person {
 如果你要这么做
 
 ![image-20211227202418905](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/202112272033877.png)
+
+
+
+#### Sealed Classes是什么
+
+![image-20220102114824361](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20220102114824361.png)
+
+sealed classes 是一个抽象类，它本身不能被实例化。只能用它的子类实例化对象；
+
+sealed classes的构造方法私有化；
 
 #### Kotlin-密封接口
 
