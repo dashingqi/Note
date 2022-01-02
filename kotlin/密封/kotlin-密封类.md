@@ -122,7 +122,7 @@ public enum Person {
 
 如果你要这么做
 
-![image-20211227202418905](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/202112281132104.png)
+![image-2021](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/202112281132104.png)
 
 
 
@@ -134,5 +134,86 @@ sealed classes 是一个抽象类，它本身不能被实例化。只能用它�
 
 sealed classes的构造方法私有化；
 
-#### Kotlin-密封接口
+
+
+#### Java枚举
+
+###### 编译之前
+
+```java
+public enum Person {
+//    CHILDRNE("efdf"),
+    MAN(1),
+    WOMEN(2);
+    private int age;
+    private String name;
+
+    private Person(int age) {
+        this.age = age;
+    }
+
+    private Person(int age, String name) {
+        this.age = age;
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+```
+
+###### 反编译Person.class文件之后
+
+```java
+/*
+ * Decompiled with CFR 0.152.
+ */
+package com.dashingqi.dqkotlin.sealed;
+
+public final class Person
+extends Enum<Person> {
+    public static final /* enum */ Person MAN = new Person("MAN", 0, 1);
+    public static final /* enum */ Person WOMEN = new Person("WOMEN", 1, 2);
+    private int age;
+    private String name;
+    private static final /* synthetic */ Person[] $VALUES;
+
+    public static Person[] values() {
+        return (Person[])$VALUES.clone();
+    }
+
+    public static Person valueOf(String string) {
+        return Enum.valueOf(Person.class, string);
+    }
+
+    private Person(String string, int n, int n2) {
+        super(string, n);
+        this.age = n2;
+    }
+
+    private Person(String string, int n, int n2, String string2) {
+        super(string, n);
+        this.age = n2;
+        this.name = string2;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public void setAge(int n) {
+        this.age = n;
+    }
+
+    static {
+        $VALUES = new Person[]{MAN, WOMEN};
+    }
+}
+
+```
 
