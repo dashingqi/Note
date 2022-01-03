@@ -4,7 +4,7 @@
 
 - Sealed Classes用于表示受限制的类层次结构；
 - 从某种意义上说，Sealed Classes是枚举类的扩展；
-- 枚举的不同之处在于，枚举中常量仅仅作为单个事例存在，而Sealed Classes的子类可以表示不同状态的实例；
+- 枚举的不同之处在于，枚举中常量仅仅作为单个实例存在，而Sealed Classes的子类可以表示不同状态的实例；
 
 #### Sealed Classes用于表示受限制的类层次结构
 
@@ -16,7 +16,7 @@ Sealed Clases用于表示层次结构
 
 ###### Kotlin 1.0
 
-密封类必须是密封类的内部类
+密封子类必须是在密封类的内部类
 
 ```kotlin
 sealed class SealedClass {
@@ -90,7 +90,7 @@ private fun enumMethod() {
 I/System.out: enum boolean  true
 ```
 
-可以看到无论声明 Person.WOMEN 多个对象，他们的实例都是同一个；这既是枚举的局限也是它的优点；
+可以看到无论声明 Person.WOMEN 多个对象，他们的实例都是同一个；这既是枚举的局限也是它的优点；（相对于密封类）
 
 ###### 所有枚举常量使用相同类型的值
 
@@ -133,7 +133,6 @@ public enum Person {
 sealed classes 是一个抽象类，它本身不能被实例化。只能用它的子类实例化对象；
 
 sealed classes的构造方法私有化；
-
 
 
 #### Java枚举
@@ -217,3 +216,114 @@ extends Enum<Person> {
 
 ```
 
+#### 使用密封类优化标记类
+
+**标记类**
+
+```kotlin
+class Figure(
+    private val shape: Shape,
+    private val radius: Double = 0.0,
+    private val length: Double = 0.0,
+    private val width: Double = 0.0
+) {
+
+    enum class Shape {
+        RECTANGLE, CIRCLE
+    }
+
+    fun area(): Double = when (shape) {
+        Shape.RECTANGLE -> length * width
+        Shape.CIRCLE -> 3.14 * radius * radius
+        else -> throw AssertionError(shape)
+    }
+
+    companion object {
+        fun createCircle(radius: Double) =
+            Figure(
+                shape = Shape.CIRCLE,
+                radius = radius
+            )
+
+
+        fun createRectangle(length: Double, width: Double = 0.0) =
+            Figure(
+                shape = Shape.RECTANGLE,
+                length = length,
+                width = width
+            )
+
+
+    }
+}
+
+// 使用
+
+val area = Figure.createCircle(5.4).area()
+println("area == $area")
+```
+
+**密封类**
+
+利用密封类的层级结构特性
+
+```kotlin
+sealed class FigureSealed {
+    abstract fun area(): Double
+}
+
+/**
+ * 长方形
+ * @property length Double 长度
+ * @property width Double 宽度
+ * @constructor
+ */
+class Rectangle(private val length: Double, private val width: Double) : FigureSealed() {
+    override fun area(): Double = length * width
+}
+
+/**
+ * 圆形
+ * @property radius Double 直径
+ * @constructor
+ */
+class Circle(private val radius: Double) : FigureSealed() {
+    override fun area(): Double = 3.14 * radius * radius
+
+}
+
+// 使用
+val circleArea = Circle(5.0).area()
+println("circleArea is $circleArea")
+```
+
+如果我们要新增图形的话，就新增一个类就可以不必要改动原有代码结构
+
+```kotlin
+/**
+ * 正方形
+ * @property width Double 宽度
+ * @constructor
+ */
+class Square(private val width: Double) : FigureSealed() {
+    override fun area(): Double = width * width
+
+}
+```
+
+配合when语句使用
+
+```kotlin
+fun FigureSealed.valida() = when (this) {
+    is Circle -> {
+
+    }
+
+    is Rectangle -> {
+
+    }
+    is Square -> {
+        
+    }
+}
+```
