@@ -196,7 +196,13 @@ val name:String by lazy{
 
 ```
 
+#### 总结
 
+委托类委托出去的是它的接口实现；委托属性，委托出去的是属性的getter,setter;
+
+val test = by lazy{}
+
+上述就是将text的getter委托给了lazy{}
 
 好啦好啦，以上就是关于Kotlin中委托的相关介绍的，要去干饭啦！
 
