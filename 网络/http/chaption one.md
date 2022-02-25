@@ -44,7 +44,7 @@ HTTP是一个在计算机世界里专门用来在两点之间传输数据的约�
 
 HTTP是一个在计算机世界里专门在两点之间传输【文本】【图片】【音频】【视频】等超文本数据的约定和规范。
 
-![HTTP是什么](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/202202251342392.png)
+![HTTP是什么](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/202202251914254.png)
 
 
 
