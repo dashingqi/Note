@@ -82,6 +82,20 @@ http://nginx.org/en/download.html
 
 ##### HTTPS
 
+HTTP是不安全的，容易被截获，串改；
+
+HTTPS是能解决这个问题；
+
+###### 基本
+
+HTTPS是运行在SSL/TLS协议上的HTTP；
+
+HTTPS = HTTP + SSL/TLS + TCP/IP
+
+###### SSL/TLS
+
+SSL 全称【Secure Socket Layer】,是由网景公司发明的，发展到【】
+
 ##### 代理
 
 
