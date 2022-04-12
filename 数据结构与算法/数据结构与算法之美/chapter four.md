@@ -35,3 +35,4 @@ a[i]_address = base_address + i * data_type_size
 ```
 
 数组支持随机访问，根据下标随机访问的时间复杂度为O(1)
+

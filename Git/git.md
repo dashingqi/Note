@@ -46,8 +46,16 @@ git add .  / git add -A
 ###### 从缓存去移除文件
 
 ```
-git rm --cached Demo.java
+git rm --cached Demo.java 
 ```
+
+###### 从缓存区中移除所有文件
+
+```
+git checkout .
+```
+
+
 
 ###### 查看隐藏文件
 

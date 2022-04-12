@@ -24,3 +24,4 @@
   ```kotlin
   adb logcat > test.log
   ```
+
