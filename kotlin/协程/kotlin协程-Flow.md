@@ -1,10 +1,10 @@
 ## Kotlin协程-Flow
 
-#### 使用
+#### flow使用
 
-###### 基本使用
+##### 上游
 
-**flow{}创建Flow**
+###### flow{}创建Flow
 
 ```kotlin
 flow<Int> {
@@ -21,7 +21,7 @@ flow<Int> {
         }
 ```
 
-**flowof创建Flow**
+###### flowof创建Flow
 
 ```kotlin
 flowOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
@@ -60,3 +60,18 @@ listOf(1, 2, 3, 4, 5)
         }
 ```
 
+##### 中间操作符
+
+###### onStart()
+
+###### onCompletion()
+
+###### catch()
+
+###### flowOn()
+
+###### launchIn()
+
+##### 下游操作符
+
+##### flow是“冷”的
