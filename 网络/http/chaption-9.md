@@ -36,7 +36,7 @@ GET / HTTP/1.1 第一行就是我们的请求行
 
 上述三部分每部分之间使用【空格】（space）分割，最后用【换行】（CRLF）表示结束
 
-<img src="/Users/zhangqi61/Downloads/DQFile/请求行结构.png" alt="请求行结构" style="zoom:150%;" />
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/202205301657590.png" alt="请求行结构" style="zoom:150%;" />
 
 看完了请求行我们看下响应报文中的响应行-【状态行】
 
@@ -54,7 +54,7 @@ HTTP/1.1 200 OK
 - 状态码: 【200】三位数字，用代码标识处理的结果
 - 原因: 【OK】：数字状态码的补充，帮助人理解原因
 
-<img src="/Users/zhangqi61/Downloads/DQFile/响应的状态行.png" alt="响应的状态行" style="zoom:150%;" />
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/202205301657632.png" alt="响应的状态行" style="zoom:150%;" />
 
 
 
