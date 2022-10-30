@@ -1,0 +1,103 @@
+{
+  "main": {
+    "id": "75953d8599bb88cd",
+    "type": "split",
+    "children": [
+      {
+        "id": "db25b913ceb4a02e",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "跑步/跑鞋.md",
+            "mode": "preview",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ad73acb15856727b",
+    "type": "split",
+    "children": [
+      {
+        "id": "84541f5e03e3bd40",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a83e51a07a7ae0b6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "eed912e6f1b96c3d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 311.5
+  },
+  "right": {
+    "id": "105e5370c9195cd2",
+    "type": "split",
+    "children": [
+      {
+        "id": "499433c960f1899d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d32f8ebd982c2e2e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "跑步/跑鞋.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "d32f8ebd982c2e2e",
+  "lastOpenFiles": [
+    "跑步/跑步手表.md",
+    "网络/登录和授权.md.md",
+    "网络/Https原理.md",
+    "网络/http/chaption-25.md",
+    "网络/http/chaption-3.md",
+    "网络/http/chaption-2.md",
+    "网络/http/chaption-1.md",
+    "性能优化/布局优化/AsyncLayoutInflater.md",
+    "性能优化/布局优化/Android绘制原理以及工具选择.md",
+    "性能优化/布局优化/优化获取布局界面布局耗时.md"
+  ]
+}
