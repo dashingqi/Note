@@ -9,8 +9,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "跑步/跑鞋.md",
-            "mode": "preview",
+            "file": "逆向/xiaomi/MI5X/隐私漏洞/未命名.md",
+            "mode": "source",
             "source": false
           }
         }
@@ -53,7 +53,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 311.5
+    "width": 319.5
   },
   "right": {
     "id": "105e5370c9195cd2",
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "跑步/跑鞋.md",
+                "file": "逆向/xiaomi/MI5X/隐私漏洞/未命名.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -87,17 +87,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "d32f8ebd982c2e2e",
+  "active": "db25b913ceb4a02e",
   "lastOpenFiles": [
-    "跑步/跑步手表.md",
-    "网络/登录和授权.md.md",
-    "网络/Https原理.md",
-    "网络/http/chaption-25.md",
-    "网络/http/chaption-3.md",
-    "网络/http/chaption-2.md",
-    "网络/http/chaption-1.md",
-    "性能优化/布局优化/AsyncLayoutInflater.md",
-    "性能优化/布局优化/Android绘制原理以及工具选择.md",
-    "性能优化/布局优化/优化获取布局界面布局耗时.md"
+    "逆向/xiaomi/MI5X/mms_leak.md",
+    "逆向/xiaomi/MI5X/隐私漏洞/AutoRegistration.md",
+    "逆向/Mac下反编译Androud安装包基本工具.md",
+    "逆向/Hook技术.md",
+    "APK/APK打包流程.md",
+    "APK/问题.md",
+    "kotlin/kotloin-基础/kotlin-object关键字.md",
+    "魔方/基础玩法.md",
+    "跑步/跑鞋.md",
+    "跑步/跑步手表.md"
   ]
 }

@@ -1,0 +1,64 @@
+#### Android原生Widget
+
+###### 简介
+
+Android原生的Widget是以Broadcast为载体的
+
+AppWidgetProvider：是Widget的实体，一个Widget对应一个AppWidgetProvider注册在AndroidManifest中，日常开发都是在AppWidgetProvider这个广播中进行
+
+AppWidgetManager：开发者主要通过这个系统服务去进行Widget上面UI的更新、事件的更新（点击）
+
+同一种Widget可以在桌面上添加多个，每个Widget回有一个唯一的的ID。ID是系统分配的；
+
+###### Widget的添加方式
+
+- 手动添加：开发者开发注册好之后，由使用者（用户）在桌面或者副一屏手动添加 入口很深的；
+
+  
+
+- 端内引导添加：由开发者在某一个业务场景触发，由用户选择是否添加钙Widget；
+
+  该功能是Android原生系统提供，不过国内厂商差异化、小米和VIVO给屏蔽，下面是华为手机上的截图
+
+  ![image-20221120104741866](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20221120104741866.png)
+
+  ![image-20221120104622092](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20221120104622092.png)
+
+###### 判断Widget是否存在桌面
+
+![image-20221120104846093](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20221120104846093.png)
+
+###### 判断该机型是否支持一键引导添加
+
+![image-20221120104906771](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20221120104906771.png)
+
+不过这个方法不是很准，在某些阉割端内引导添加的机型上，发现它的返回值还是true 就很头疼；
+
+#### VIVO低版本ROOM支持静默添加
+
+###### VIVO-Launcher关键信息
+
+###### 桌面Launcher
+
+- 该机型的ROM版本：OriginOS 1.0
+
+- 包名：com.bbk.Launcher2![image-20221120101806132](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20221120101806132.png)
+
+###### 反编译关键信息
+
+- 类名： LauncherAppWidgetManager
+
+- 关键代码
+
+  ![image-20221120102035156](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20221120102035156.png)
+
+这个ACTION是主要突破口,并且它会根据你传递的packageName和className组成的ComponentName进行校验的；
+
+![image-20221120103302366](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20221120103302366.png)
+
+###### 验证代码（以某APP的Widget为例子）
+
+需要安装这个APP
+
+![image-20221120102846912](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20221120102846912.png)
+
