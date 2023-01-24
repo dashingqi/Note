@@ -1,0 +1,120 @@
+{
+  "main": {
+    "id": "75953d8599bb88cd",
+    "type": "split",
+    "children": [
+      {
+        "id": "99c8ee96f7b88d8a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "db25b913ceb4a02e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "读书笔记/技术/Android构建与架构实战/Chaption Two/2.2 Gradle生命周期.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ad73acb15856727b",
+    "type": "split",
+    "children": [
+      {
+        "id": "84541f5e03e3bd40",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a83e51a07a7ae0b6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "eed912e6f1b96c3d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 319.5
+  },
+  "right": {
+    "id": "105e5370c9195cd2",
+    "type": "split",
+    "children": [
+      {
+        "id": "499433c960f1899d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d32f8ebd982c2e2e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "读书笔记/技术/Android构建与架构实战/Chaption Two/2.2 Gradle生命周期.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:Create new canvas": false,
+      "command-palette:打开命令面板": false,
+      "markdown-importer:打开 Markdown 格式转换器": false
+    }
+  },
+  "active": "db25b913ceb4a02e",
+  "lastOpenFiles": [
+    "逆向/xiaomi/MI5X/mms_leak.md",
+    "逆向/xiaomi/MI5X/隐私漏洞/AutoRegistration.md",
+    "逆向/Mac下反编译Androud安装包基本工具.md",
+    "逆向/Hook技术.md",
+    "APK/APK打包流程.md",
+    "APK/问题.md",
+    "kotlin/kotloin-基础/kotlin-object关键字.md",
+    "魔方/基础玩法.md",
+    "跑步/跑鞋.md",
+    "跑步/跑步手表.md"
+  ]
+}
