@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "99c8ee96f7b88d8a",
+        "id": "ee8c88129b47993d",
         "type": "tabs",
         "children": [
           {
-            "id": "db25b913ceb4a02e",
+            "id": "22dd47fc196ae22c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "读书笔记/技术/Android构建与架构实战/Chaption Two/2.2 Gradle生命周期.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               }
             }
@@ -61,7 +61,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 319.5
+    "width": 200
   },
   "right": {
     "id": "105e5370c9195cd2",
@@ -99,22 +99,21 @@
     "hiddenItems": {
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
-      "canvas:Create new canvas": false,
       "command-palette:打开命令面板": false,
       "markdown-importer:打开 Markdown 格式转换器": false
     }
   },
-  "active": "db25b913ceb4a02e",
+  "active": "22dd47fc196ae22c",
   "lastOpenFiles": [
-    "逆向/xiaomi/MI5X/mms_leak.md",
-    "逆向/xiaomi/MI5X/隐私漏洞/AutoRegistration.md",
-    "逆向/Mac下反编译Androud安装包基本工具.md",
-    "逆向/Hook技术.md",
-    "APK/APK打包流程.md",
-    "APK/问题.md",
-    "kotlin/kotloin-基础/kotlin-object关键字.md",
-    "魔方/基础玩法.md",
-    "跑步/跑鞋.md",
-    "跑步/跑步手表.md"
+    "读书笔记/技术/安卓传奇:Android缔造团队回忆录/Member.md",
+    "读书笔记/技术/安卓传奇:Android缔造团队回忆录/Company.md",
+    "未命名.canvas",
+    "README.md",
+    "技术/Java/IO/基础.md",
+    "技术/Android/路由/路由框架实现/路由实现.md",
+    "技术/Android/路由/路由框架实现/构建的基石-Gradle.md",
+    "技术/Android/路由/ARouter/Arouter的基本使用.md",
+    "技术/Android/换肤/换肤-Skin.md",
+    "技术/Android/动画/问题.md"
   ]
 }
