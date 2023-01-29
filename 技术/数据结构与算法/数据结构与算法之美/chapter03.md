@@ -1,4 +1,4 @@
-## 复杂度分析：如何分析、统计算法的执行效率和资源消耗
+## 03复杂度分析：如何分析、统计算法的执行效率和资源消耗
 
 衡量算法代码的执行效率 - 时间、空间复杂度
 
@@ -10,7 +10,11 @@
 
 Tn = O*(f(n))
 
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230129172243014.png" alt="image-20230129172243014" style="zoom:200%;" />
+
 #### 时间复杂度分析
+
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230129172419746.png" alt="image-20230129172419746" style="zoom:200%;" />
 
 三个比较使用的方法
 
@@ -67,6 +71,8 @@ int cal(int n) {
 
 该段代码的时间复杂度为 T(n) = O(n^2)
 
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230129173218807.png" alt="image-20230129173218807" style="zoom:200%;" />
+
 ###### 乘法法则：嵌套代码的复杂度等于潜逃内外代码复杂度的乘积
 
 *乘法法则可以堪称是嵌套循环*
@@ -97,13 +103,15 @@ T(n) = T1(n) * T2(n) = O(n*n) = O(n^2)
 
 ###### O(1)
 
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230129173626199.png" alt="image-20230129173626199" style="zoom:200%;" />
+
 ```java
  int i = 8;
  int j = 6;
  int sum = i + j;
 ```
 
-一般情况下，只要算法中不逊在循环语句、递归语句，即使有成千上万行的代码，其时间复杂度也是O(1)
+一般情况下，只要算法中不存在循环语句、递归语句，即使有成千上万行的代码，其时间复杂度也是O(1)
 
 ###### O(log^n)、O(n*log^2)
 
@@ -165,6 +173,8 @@ m和n是两个数据规模，无法判断谁的量级大，在表示时间复杂
 
 #### 空间复杂度
 
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230129174555209.png" alt="image-20230129174555209" style="zoom:200%;" />
+
 ###### 时间复杂度
 
 是渐进时间复杂度，表示算法的执行时间与数据规模之间的增长关系
@@ -193,6 +203,8 @@ void print(int n) {
 我们常见的空间复杂度是 O(1)、O(n)、O(n^2)
 
 像O(logn)、O(nlogn)这样对数阶复杂度平时用不到；
+
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230129175042720.png" alt="image-20230129175042720" style="zoom:200%;" />
 
 
 

@@ -21,3 +21,7 @@
 ###### 学习重点
 
 想要学习数据结构与算法，首先掌握一个数据结构与算法中最重要的概念-复杂度分析
+
+#### 需要学习
+
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230129170248403.png" alt="image-20230129170248403" style="zoom:200%;" />
