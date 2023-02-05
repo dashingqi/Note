@@ -12,7 +12,7 @@ Android的框架层提供如下功能
 - 输入
 - 活动管理器
 
-##### Dianne(黛安娜) Hackborn 和Android框架
+#### Dianne(黛安娜) Hackborn 和Android框架
 
 ###### 简介
 
@@ -32,7 +32,7 @@ Dianne时最了解Android框架和整个平台的人;【她】编写了框架的
 - Palm 拆分出PalmSource 并开发出Palm OS 6 ，它提供了一个强大的UI框架；之后被ACCESS收购；ACCESS收购之后并不看好当时的方向，改变了团队的操作系统策略；
 - Google当时在做一个平台是开源的，并且不用担心资源的问题；之后Dianne就加入Google，并于2006年一月加入Android；
 
-##### Activity
+#### Activity
 
 ###### 简介
 
@@ -51,9 +51,9 @@ Activity这个概念是从团队早期（在PalmSource）的一个想法演化�
 
 ###### 结论
 
-![image-20230205150653394](https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230205150653394.png)
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230205150653394.png" alt="image-20230205150653394" style="zoom:200%;" />
 
-##### 资源
+#### 资源
 
 ###### 简介
 
@@ -61,5 +61,36 @@ Dianne参与了资源系统的开发；
 
 ###### 经历
 
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230205153237057.png" alt="image-20230205153237057" style="zoom:200%;" />
+
 - 移动设备屏幕存储
 - 移动设备屏幕分辨率
+
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230205153326416.png" alt="image-20230205153326416" style="zoom:200%;" />
+
+#### 窗口管理器
+
+##### 软键盘
+
+###### 简介
+
+从输入法编辑器的设计上来看，Android系统的发展方向就不是为某一个设备单独定制化的，而是做一个平台一个通用的平台，提供灵活和可扩展的支持；
+
+这个灵活不仅体现在系统框架的内部上，并且还为开发者提供了扩展的特性；开发者可以定制自己的输入法编辑器（Input Method Editor，IME）提供给用户进行使用；（AndroidIME的特性）
+
+Android团队是一个很具有前瞻性的团队（当然从现在看Android系统的的发展确实是这样的）当时所处于的时代背景下，就能预计到设备和用户的生态系统可能会变得非常庞大和多样化；真是一帮【可怕（天才级别）】的人；
+
+IMF（Input Method Framework）:是用来提供给开发开发第三方IME工具包；
+
+###### ShapeWriter
+
+在第三方开发的键盘中ShapeWriter是具有划时代意义的，是由当时在IBM的翟树民开发；
+
+后来他加入了Android开发团队，并lead团队为Android系统的IME提供了手势输入；
+
+#### 自上而下的Jeff Hamilton
+
+###### 简介
+
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/image-20230205160507440.png" alt="image-20230205160507440" style="zoom:200%;" />
+
