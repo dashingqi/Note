@@ -62,8 +62,32 @@ p.next -> x
 
 - 链表中环的检测
 
-- 两个有序的链表合并
+  <img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8.png" alt="环形链表" style="zoom:200%;" />
 
-- 删除链表倒数第n个结点
+  ```kotlin
+   /**
+     * 环形链表 通过快慢指针
+     * @param head ListNode?
+     * @return Boolean
+     */
+  internal fun hasCycle(head: ListNode?): Boolean {
+      head ?: return false
+      head.next ?: return false
+      var fast = head
+      var slow = head
+      while (fast?.next != null) {
+          fast = fast.next?.next
+          slow = slow?.next
+          if (fast == slow) {
+              return true
+          }
+      }
+      return false
+  }
+  ```
 
-- 求链表的中间结点
+- 两个有序的链表合并；
+
+- 删除链表倒数第n个结点；
+
+- 求链表的中间结点；
