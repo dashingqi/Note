@@ -91,3 +91,23 @@ p.next -> x
 - 删除链表倒数第n个结点；
 
 - 求链表的中间结点；
+
+  ```kotlin
+  /**
+   * 求出链表的中间结点
+   * @param head ListNode? 头结点
+   * @return ListNode? 中间结点
+   */
+  fun middleNode(head: ListNode?): ListNode? {
+      var fastNode = head
+      var slowNode = head
+      while (fastNode?.next != null) {
+          fastNode = fastNode.next?.next
+          slowNode = slowNode?.next
+      }
+  
+      return slowNode
+  }
+  ```
+
+  
