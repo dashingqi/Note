@@ -78,7 +78,9 @@ AppLifecycleState枚举类：Flutter对App生命周期状态的封装
 - inactive：处在不活动状态，无法处理用户响应
 - paused：不可见并不能响应用户的输入，但是在后台继续活动中；
 
-<img src="https://static001.geekbang.org/resource/image/28/e6/2880ffdbe3c5df3552c0b22c34157ae6.png?wh=622*462" alt="img" style="zoom:200%;" />
+应用压后台：AppLifecycleState.inactive --> AppLifecycleState.paused
+
+应用从后台切换到前台 : AppLifecycleState.paused --> AppLifecycleState.resumed
 
 ##### 帧绘制回调
 
