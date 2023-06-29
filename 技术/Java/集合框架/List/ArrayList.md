@@ -147,30 +147,29 @@ public class ArrayList<E> extends AbstractList<E>
           System.arraycopy(a, 0, elementData, size, numNew);
           size += numNew;
           return numNew != 0;
-      }
+   }
   ```
-```
-  
-
 #### ArrayList的get方法
 
 - get(int index)方法
 
   ```java
   public E get(int index) {
-    			//越界检查
+          //越界检查
           rangeCheck(index);
-  				//根据角标返回数据
+          //根据角标返回数据
           return elementData(index);
       }
+  
   private void rangeCheck(int index) {
           if (index >= size)
               throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
       }
+  
   E elementData(int index) {
           return (E) elementData[index];
       }
-```
+  ```
 
   - 检查index是否大于数组容量-1 ，就是进行数组越界检查
   - 根据index，获取到数组中的数据，并将其返回
