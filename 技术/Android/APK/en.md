@@ -9,6 +9,7 @@
 - 个人Github：https://github.com/dashingqi
 - 期望职位：Android开发工程师
 - 电话邮箱：13478493231/dashingqi@gmail.com
+- 业余跑者、马拉松爱好者
 
 ------
 
@@ -59,7 +60,7 @@
       - Widget调启Hissug：由Intent+广播调起方式优化成Intent直接调起方式；（冷启动优化300ms，热启动优化75ms）
       - 适配鸿蒙系统后台弹窗权限限制Widget调起失败问题；（75%Widget为鸿蒙系统）
     - Widget动态化能力的建设；减少开发工时，业务接入轻便，生态化；（版本人工作量减少3pd）
-    - Widget技术能力的突破；提高Widget添加量；（VIVO：10%，小米：3%）
+    - Widget技术能力的突破；提高Widget添加量；（VIVO：20%，荣耀：30%）
     - Widget支持动画播放；业界首家Widget支持动画播放；
 - 手百通用权益发放能力建设
   - 风险控制、核心功能开发、项目推动；
