@@ -215,7 +215,7 @@ View view = content.getChildAt(0);
     ```
 
     ```
-  
+    
     
   
   ##### ViewGroup的Measure
@@ -303,7 +303,7 @@ View view = content.getChildAt(0);
     //通过post方法将一个runnable投放到消息队列的的尾部，等待looper取到消息调用到这个runnable的时候，View已经初始化好了
     //典型的模版代码如下
     @Override
-        protected void onStart() {
+    protected void onStart() {
             super.onStart();
             mBtnToastWorkThread.post(new Runnable() {
                 @Override
@@ -363,7 +363,7 @@ View view = content.getChildAt(0);
 
   ##### View的测量后宽和高与最总得到的宽和高相等吗？
 
-  	> 该问题就是 getMeasuredHeight()和getMeasuredWidth() 与 getHeight()和getWidth() 得到得值相等吗？
+  > 该问题就是 getMeasuredHeight()和getMeasuredWidth()与getHeight()和getWidth()得到得值相等吗？
 
   - 正常情况下测量后得到的值域最终得到的值是相等的
   - 前者是发生在measure过程中，后者发生在layout过程中。

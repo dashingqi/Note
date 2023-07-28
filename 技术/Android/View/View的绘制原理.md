@@ -49,12 +49,12 @@ private void performMeasure(int childWidthMeasureSpec, int childHeightMeasureSpe
  private void performLayout(WindowManager.LayoutParams lp, int desiredWindowWidth,
             int desiredWindowHeight) {
    // 省略代码 。。。。。
-   //分析
+   // 分析
    host.layout(0, 0, host.getMeasuredWidth(), host.getMeasuredHeight());
  }
 ```
 
-分析：这里host时DecorView，可以发现调用的是 ViewGroup 中的layout，并且在layout内部有调用了View的layout方法，
+分析：这里host是DecorView，可以发现调用的是 ViewGroup 中的layout，并且在layout内部有调用了View的layout方法，
 
 ```java
 public final void layout(int l, int t, int r, int b) {
@@ -131,8 +131,8 @@ MeasureSpec提供了打包和解包的方法，将SpecMode和SpecSize打包成Me
 
 ```java
 /**
-*看的出来View的MeasureSpec由父容器的MeasureSpec和自身的LayoutParams决定，也和Padding和Margin有关。
-*/
+ * 看的出来View的MeasureSpec由父容器的MeasureSpec和自身的LayoutParams决定，也和Padding和Margin有关。
+ */
 protected void measureChildWithMargins(View child,
             int parentWidthMeasureSpec, int widthUsed,
             int parentHeightMeasureSpec, int heightUsed) {
