@@ -205,7 +205,7 @@
 
 - 直观来说，Binder是Android中的一个类，实现了IBinder接口。
 
-- IPC角度说，Binder是Aandroid中的一种跨进程通信方式。
+- IPC角度说，Binder是Android中的一种跨进程通信方式。
 
 - 从Android FrameWork角度说，Binder是ServiceManager链接各种Manager和相应ManagerService的桥梁。
 
@@ -879,6 +879,11 @@
 ###### 使用ContentProvider
 
 ###### 使用Socket
+
+1. **性能和效率：** 使用 Socket 进行跨进程通信涉及到序列化和反序列化数据，并将其通过网络传输，这可能导致性能下降和资源浪费。而 Binder 和 AIDL 是专为 Android 设计的 IPC（Inter-Process Communication）机制，更加高效并针对 Android 进程间通信需求进行了优化。
+2. **复杂性：** 使用 Socket 进行跨进程通信需要开发者自行处理连接、数据传输、错误处理等一系列操作，代码相对复杂。相比之下，使用 Binder 和 AIDL 可以更轻松地定义接口和交互，并由系统自动处理连接和数据传输。
+3. **安全性：** 使用 Socket 进行跨进程通信需要自行处理安全性问题，例如身份验证和数据加密。而 Binder 已经集成了安全性的机制，可以确保通信双方是可信任的，并提供了权限控制机制。
+4. **适用性：** Socket 主要用于网络通信，而 Android 中的进程通信往往是在同一台设备上的不同进程之间进行，使用 Binder 和 AIDL 更加适合这种场景。
 
 ## Binder连接池
 
