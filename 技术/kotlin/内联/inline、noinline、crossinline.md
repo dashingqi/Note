@@ -42,7 +42,7 @@ public static final int performOperation(int a, int b, @NotNull Function2 operat
 - 在非inline函数中，return无法使用（必须使用return@xxx 指明返回的函数），只有在inline函数中可以使用return语句这样就不会有异议；
 
 ```kotlin
-nline fun inlineFunction(block: () -> Unit) {
+inline fun inlineFunction(block: () -> Unit) {
     println("Before inline")
     block()
     println("After inline")
@@ -76,3 +76,94 @@ fun performMain() {
 }
 ```
 
+#### JMH 测试 inline
+
+###### 调用一次
+
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/inline-jmh-1.png" alt="inline-jmh-1" style="zoom:200%;" />
+
+###### 嵌套调用10次
+
+```kotlin
+@BenchmarkMode(Mode.Throughput)
+@Warmup(iterations = 3)
+@Measurement(iterations = 5, time = 2, timeUnit = TimeUnit.SECONDS)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
+open class InlineBenchmark {
+
+    private fun foo(block: () -> Unit) {
+        block()
+    }
+
+    private inline fun fooInline(block: () -> Unit) {
+        block()
+    }
+
+    @Benchmark
+    fun testNoInline() {
+        var i = 0
+        foo {
+            foo {
+                foo {
+                    foo {
+                        foo {
+                            foo {
+                                foo {
+                                    foo {
+                                        foo {
+                                            foo {
+                                                i++
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    @Benchmark
+    fun testInline() {
+        var i = 0
+        fooInline {
+            fooInline {
+                fooInline {
+                    fooInline {
+                        fooInline {
+                            fooInline {
+                                fooInline {
+                                    fooInline {
+                                        fooInline {
+                                            fooInline {
+                                                i++
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+fun main() {
+    val options = OptionsBuilder()
+        .include(InlineBenchmark::class.java.simpleName)
+        .resultFormat(ResultFormatType.JSON)
+        .build()
+
+    Runner(options).run()
+}
+```
+
+<img src="https://raw.githubusercontent.com/dashingqi/DQPicBeg/main/inline-jmh.png" alt="inline-jmh" style="zoom:200%;" />
+
+可以看到当处于嵌套多次调用时，使用inline关键字的性能要远好于noinline
