@@ -169,7 +169,7 @@ private void considerNotify(ObserverWrapper observer) {
 
 #### 总结
 
-- LiveData内部是依靠Lifecycle来感知组件的生命周期，开避免内部泄漏的。
+- LiveData内部是依靠Lifecycle来感知组件的生命周期，避免内部泄漏的。
 - 当观察到组件处于不可见状态的时候，会移除当前观察者的监听
 - 当处于活跃状态的时候，当LiveData的数据源发生变化的会监听到数据变化拿到数据，去更新UI
 - 对于set和post这两种更新数据源，其实最终post还是调用了set，只不过在中间用到了Handler关联到了主线程中的Looer，调用了post切换到主线程中。

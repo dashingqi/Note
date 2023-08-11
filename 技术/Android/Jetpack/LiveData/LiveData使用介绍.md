@@ -59,7 +59,7 @@
 
 ###### map
 
-> 这里说的map实则是调用了Transformations#map()方法，通过该方法可以将我们的LiveData进行数据类型转换成新类型的LiveData,然后在Activity中注册新LiveDaya的观察者就能拿到数据源了，
+> 这里说的map实则是调用了Transformations#map()方法，通过该方法可以将我们的LiveData进行数据类型转换成新类型的LiveData,然后在Activity中注册新LiveData的观察者就能拿到数据源了，
 >
 > 说的可能比较抽象，以列子来说明吧
 

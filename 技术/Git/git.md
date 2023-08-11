@@ -206,6 +206,20 @@ git merge dev --no-ff
 git rebase dev
 ```
 
+**将多次commit提交信息合并为一次commi信息**
+
+```gfm
+git add .
+git commit -m "【update1】"
+修改代码后重新commit
+git add .
+git commit -m "【update2】"
+
+合并commit信息
+git rebase -i HEAD~2
+不保留commit信息，就将pick修改成fixup
+```
+
 ###### git mergetool  # vimdiff
 
 ```
@@ -303,5 +317,11 @@ git branch -vv
 git rm -r --cached .
 ```
 
+###### merge和rebase区别
 
+两者都是进行代码合并操作；
+
+merge 合并代码会合并提交历史记录并保留提交历史；
+
+rebase 合并
 
