@@ -17,3 +17,16 @@ private fun lock(str: String, str2: String, method: (str: String, str2: String) 
  println("result is ${lock("dashingqi", "zhangqi", ::getResult)}")
 ```
 
+
+
+#### 类对象
+
+```kotlin
+fun main(){
+  val a = A::class.java
+  val b = A::class
+}
+
+class A{}
+```
+
