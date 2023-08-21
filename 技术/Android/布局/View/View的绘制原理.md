@@ -431,3 +431,39 @@ public void layout(int l,int t,int r,int b){
 - 绘制自己（onDraw()）
 - 绘制children（dispatchDraw()）
 - 绘制装饰（onDrawScrollBars()）
+
+#### View.invalidate()
+
+###### 流程
+
+调用 View.invalidate() 方法后会逐级往上调用父 View 的相关方法，最终在 Choreographer 的控制下调用 ViewRootImpl.performTraversals() 方法。由于 mLayoutRequested == false，因此只有满足 `mFirst || windowShouldResize || insetsChanged || viewVisibilityChanged || params != null ...` 等条件才会执行 measure 和 layout 流程，否则只执行 draw 流程，draw 流程的执行过程与是否开启硬件加速有关
+
+###### onDraw()与硬件加速
+
+- 关闭硬件加速则从 DecorView 开始往下的所有子 View 都会被重新绘制。
+- 开启硬件加速则只有调用 invalidate 方法的 View 才会重新绘制。
+- View 在绘制后会设置 PFLAG_DRAWN 标志位。
+
+#### View.requestLayout()
+
+###### measure()
+
+- 在该方法调用时，会给当前 View 以及父View 都设置了PFLAG_FORCE_LAYOUT;
+- 当调用 measure()方法时此时判断设置了PFLAG_FORCE_LAYOUT标记位，那么就会触发 onMeasure()方法；
+- 对于没有设置该标记位，会判断当前 View的尺寸是否有变化来决定调用onMasure()方法；
+- onMeasure()方法之后又设置了PFLAG_LAYOUT_REQUIRED 标记位；
+
+###### layout()
+
+- 在measure过程中设置了PFLAG_LAYOUT_REQUIRED标记位，那么就会调用onLayout()方法进行布局；
+- 否则如果View 的四个定点位置发生变换也会触发onLayout()方法；
+
+###### draw()
+
+- 如果View的四个定点没有发生变换就不会触发invalidate方法进行重绘；
+
+###### 总结
+
+调用 View.requestLayout 方法后会依次调用 performMeasure, performLayout 和 performDraw 方法，调用者 View 及其父 View 会重新从上往下进行 measure, layout 流程，一般情况下不会执行 draw 流程(子 View 会通过判断其尺寸/顶点是否发生改变而决定是否重新 measure/layout/draw 流程)。
+
+因此，当只需要进行重绘时可以使用 invalidate 方法，如果需要重新测量和布局则可以使用 requestLayout 方法，而 requestLayout 方法不一定会重绘，因此如果要进行重绘可以再手动调用 invalidate 方法。

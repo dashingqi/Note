@@ -18,7 +18,6 @@ private fun lock(str: String, str2: String, method: (str: String, str2: String) 
 ```
 
 
-
 #### 类对象
 
 ```kotlin
@@ -29,4 +28,4 @@ fun main(){
 
 class A{}
 ```
-
+#### 类引用
