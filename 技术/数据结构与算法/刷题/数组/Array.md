@@ -147,3 +147,55 @@ public int[] twoSum(int[] nums, int target) {
 }
 ```
 
+###### 使用数组实现队列
+
+```java
+static class DQQueueV1 {
+        int[] arr;
+        int capacity;
+        int head = 0;
+        int tail = 0;
+
+        public DQQueueV1(int capacity) {
+            this.capacity = capacity;
+            arr = new int[capacity];
+        }
+
+        /**
+         * 入队
+         *
+         * @param value
+         */
+        public void enqueue(int value) {
+            // 当前队列已满
+            if (tail == capacity) {
+                return;
+            }
+            arr[tail] = value;
+            tail++;
+        }
+
+        /**
+         * 出队
+         *
+         * @return
+         */
+        public int dequeue() {
+            // 判断当前队列空为空
+            if (head == tail) return -1;
+            int tempValue = arr[head];
+            head++;
+            return tempValue;
+        }
+
+        /**
+         * 大小
+         *
+         * @return
+         */
+        public int size() {
+            return tail - head;
+        }
+    }
+```
+
