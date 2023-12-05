@@ -86,5 +86,45 @@
 ###### parent == null && attachToRoot = false
 - 父布局为空，此时resource声明的布局参数不生效，默认为wrap_content,此时resource没有被添加到parent中，此时inflate返回的View为resource；
 
+#### 包体积优化
+##### 代码
+- 使用Proguard工具对我们的源代码进行混淆，将代码类文件换成简约的名字文件，并且具有一定的安全性；
+- 对于三库的使用：避免拥有相同功能引入不同三方库的场景；三方库功能居多，业务场景使用有限，代码进行改造；
+- 无用代码的删除- AOP思想实现Activity/Fragment的使用情况，其他类构造方法；
+- 功能组件统一UI样式，工具类的封装；
+###### 跨Dex调用优化，
+- 65536问题我们进行多Dex解决这个问题，就会出现跨Dex调用问题，跨Dex调用就会在Dex中存储methodId，这个会影响dex中class对象数，就会出现更多的Dex；
+- 使用ReDex「FaceBook」的InterDexPass进行优化，将存在跨Dex调用的情况，分配在同一个Dex中；
+###### 插件化工程
 
+- 将独立的功能以插件的形式进行后下发；
 
+##### 资源
+- 大文件资源进行后下发形式，避免内置占用包体积；
+- 使用Lint Remove UnuseResource 将冗余的资源进行删除；
+- 内置图片资源进行压缩处理，UI同学提供的资源图片未进行压缩，
+- 资源的混淆，将资源名称进行混淆，换成简单名称，减小resources.arsc、metadata 签名⽂件以及 ZIP ⽂件⼤⼩的效果，极限压缩使用 7-Zip
+- 重复资源的优化-ByteX
+- 图片的格式：WebP > png > jpg,
+- shape drawable 文件的复用 保持相同风格；
+##### so文件
+- 保留Armeabi 架构的so文件，去除别的架构so文件；
+##### 长期方案
+###### 利用CI（流水线）
+- 设置阈值：一个需求的提交代码增量不能超过 100KB，超过需要给出合理解释以及豁免
+- apk-check，现有Apk提及与线上APK包体积进行比较 ，设置阈值 超过1MB 进行发邮件通知，
+
+#### ANR
+##### ANR种类
+- Activity#onCreate() 或者Input 事件超过5S
+- BroadcastReceiver ，应用处于前台10S，后台60S
+- ContentProvider在publish超过10S
+- Service 前台服务 20S，后台200s
+##### 引起原因
+- 主线程有耗时操作 （IO操作、复杂布局）
+- 被Binder对端block住（进程）
+##### ANR排查
+- 拿到 bugReport文件，搜索关键字 ANR in 找到对应进程pid与发生时间，通过pid和发生向下搜索 main关键字找到对应log信息；
+##### ANR的监控
+- 低版本使用FileObserver监控 data/anr/trace.txt文件的变化；
+- 高版本使用ANR-WatchDog 监控主线程
