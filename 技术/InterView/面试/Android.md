@@ -86,5 +86,32 @@
 ###### parent == null && attachToRoot = false
 - 父布局为空，此时resource声明的布局参数不生效，默认为wrap_content,此时resource没有被添加到parent中，此时inflate返回的View为resource；
 
+#### RecyclerView
 
+##### 优化方式
 
+###### 布局
+
+- 减少过度绘制：布局中避免不必要的北京和透明度，减少过度绘制；
+- 合理使用布局：使用 ConstraintLayout 减少布局层级，提高渲染效率；
+- 使用多种布局类型：当列表中出现多种布局的类型，使用多 Type 的特点；
+
+###### 更新
+
+- 使用 DiffUtil 进行数据更新：比较新旧列表数据的差异，提供最小操作集；
+- 懒加载图片和资源：当 RecyclerView 滑动时延迟加载图片，保证图片的流畅性；
+
+###### 缓存
+
+- ViewHolder模式的引入，可以有效的复用视图，避免减少findViewById()使用的次数；
+- 预加载和缓存：预加载屏幕之外的 Item 提高滚动性能；通过提高 RecyclerView 缓存池的大小进一步优化（缓存池中缓存ViewHolder）
+
+###### 过度处理
+
+- 避免在onBindViewHolder中做过多处理：因为在滑动过程中onBindViewHolder会被重复调用；
+
+##### onCreateViewHolder()方法中通过异步方式去创建 ViewHolder 会有什么问题
+
+- 线程安全和同步问题：ViewHolder 创建在异步线程，更新UI 在主线程需要保证线程安全问题；
+- 性能问题：onCreateViewHolder()方法的目的是用来创建 ViewHolder,这个过程不是性能瓶颈。异步创建ViewHolder不会有有效的性能提升，会因线程的切换导致性能下降呢；
+- ViewHolder是用来进行复用来提高性能，放在子线程创建会导致视图创建和回收的混乱；
