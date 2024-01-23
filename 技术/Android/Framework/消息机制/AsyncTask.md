@@ -18,4 +18,4 @@
 ## 原理
 
 - AsyncTask中有两个线程池（SerialExecutor、THREAD_POOL_EXECUTOR）和一个Handler（InternalHandler）,其中SerialExecutor是用于任务的排队，线程池THREAD_POOL_EXECUTOR是用于任务的执行，而InterlHandler用于将环境从工作线程切换到UI线程上。
-- InternalHandler的对象引用sHandler是一个静态对象，为了让工作环境从工作线程切换到主线程中，sHandler必须要在主线程中创建，由于是静态的所以在类加载的就已经进行初始化了，这就变相要求AsyncTask需要在主线程中创建！
+- InternalHandler的对象引用snvim-treesitter[comment]: Error during download, please verify your internet connectionHandler是一个静态对象，为了让工作环境从工作线程切换到主线程中，sHandler必须要在主线程中创建，由于是静态的所以在类加载的就已经进行初始化了，这就变相要求AsyncTask需要在主线程中创建！
